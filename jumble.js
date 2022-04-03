@@ -8,7 +8,7 @@ const score = document.querySelector('.score1');
 score.innerHTML = 0;
 
 let game = false;
-let highScore = localStorage.getItem('highScore', 0);
+let highScore = localStorage.getItem('highscore') || 0;
 let defaultScore = 0;
 let newWord = "";
 let randomWord = "";
@@ -38,7 +38,7 @@ function gameMenu() {
     greetMessage.style.display = "block";
     stopButton.style.display = "none";
     guessWord.style.display = "none";
-    messageLabel.style.display = "none";
+    messageLabel.style.display = "none"; 
 }
 
 function gameCheck() {
@@ -92,6 +92,7 @@ function startGame() {
 
 function endGame() {
     game = false;
+    startButton.innerHTML = "Start again ?"
     gameHighScore();
     gameMenu();
 }
@@ -99,9 +100,10 @@ function endGame() {
 function gameHighScore() {
     if (highScore !== null) {
         if (defaultScore > highScore) {
-            localStorage.setItem("highScore", defaultScore);
+            var highscore = defaultScore;
+            localStorage.setItem("highScore", highscore);
             scoreHeader.innerHTML = "High score"
-            score.innerHTML = highScore;
+            score.innerHTML = highscore;
         } else {
             localStorage.setItem("highScore", defaultScore);
         }
